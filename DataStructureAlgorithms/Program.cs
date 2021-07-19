@@ -8,28 +8,28 @@ namespace DataStructureAlgorithms
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Data Structures Algorithm Programs!");
-            UnorderedList <string> unOrdered = new UnorderedList <string>();
+            OrderedList <string> ordered = new OrderedList <string>();
             //created a text file
             string filePath = @"C:\Users\Sona G\source\repos\DataStructureAlgorithms\DataStructureAlgorithms\wordFile.txt";
             string text = File.ReadAllText(filePath);
             string[] stringArray = text.Split(" ");
             for (int i = 0; i < stringArray.Length; i++)
             {
-                unOrdered.AddLast(stringArray[i]);
+                ordered.Add(stringArray[i]);
             }
             //Get the input from user
             Console.WriteLine("Enter the word to searched:");
             string word = Console.ReadLine();
-            int found = unOrdered.SearchNode(word);
+            int found = ordered.SearchNode(word);
             if (found == 1)
             {
-                unOrdered.DeleteNode(word);
+                ordered.DeleteNode(word);
             }
             else
             {
-                unOrdered.AddLast(word);
+                ordered.Add(word);
             }
-            string data = unOrdered.Display();
+            string data = ordered.Display();
             File.WriteAllText(filePath, data);
         }
     }
