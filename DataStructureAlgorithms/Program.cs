@@ -8,19 +8,19 @@ namespace DataStructureAlgorithms
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Data Structures Algorithm Programs!");
-            
+
             //created a text file
             string filePath = @"C:\Users\Sona G\source\repos\DataStructureAlgorithms\DataStructureAlgorithms\wordFile.txt";
             string text = File.ReadAllText(filePath);
             string[] stringArray = text.Split(" ");
-            
-            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis");
+
+            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Palindrome Checker");
             Console.WriteLine("Enter Your Option");
             int choice = (Convert.ToInt32(Console.ReadLine()));
             switch (choice)
             {
 
-             case 1:
+                case 1:
                     UnorderedList<string> unOrdered = new UnorderedList<string>();
                     for (int i = 0; i < stringArray.Length; i++)
                     {
@@ -42,13 +42,13 @@ namespace DataStructureAlgorithms
                     File.WriteAllText(filePath, data);
                     break;
 
-             case 2:
+                case 2:
                     OrderedList<string> ordered = new OrderedList<string>();
                     for (int i = 0; i < stringArray.Length; i++)
                     {
                         ordered.Add(stringArray[i]);
                     }
-                   //Get the input from user
+                    //Get the input from user
                     Console.WriteLine("Enter the word to searched:");
                     string wordOrdered = Console.ReadLine();
                     int found1 = ordered.SearchNode(wordOrdered);
@@ -63,9 +63,9 @@ namespace DataStructureAlgorithms
                     string data1 = ordered.Display();
                     File.WriteAllText(filePath, data1);
                     break;
-             case 3:
+                case 3:
                     Stack<char> stack = new Stack<char>();
-                    string expression = "(5+6)∗(7+8)/(4+3(5+6)∗(7+8)/(4+3)";
+                    string expression = "(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3)";
                     for (int i = 0; i < expression.Length; i++)
                     {
                         if (expression[i].Equals('('))
@@ -74,7 +74,7 @@ namespace DataStructureAlgorithms
                         }
                         else if (expression[i].Equals(')'))
                         {
-                             stack.Pop();
+                            stack.Pop();
                         }
                     }
                     if (stack.CheckParanthesis() == 1)
@@ -85,6 +85,34 @@ namespace DataStructureAlgorithms
                     {
                         Console.WriteLine("Arithmetic Expression is unbalanced");
                     }
+                    break;
+                case 4:
+                    Palindromechecker<char> queue = new Palindromechecker<char>();
+                    int flag = 1;
+                    string word2 = "kala";
+                    for (int i = 0; i < word2.Length; i++)
+                    {
+                        queue.Enqueue(word2[i]);
+                    }
+                    while (queue.CheckEquality() == 1)
+                    {
+                        if (!(queue.DequeueFront().Equals(queue.DequeueRear())))
+                        {
+                            flag = 0;
+                            break;
+                        }
+                    }
+                    if (flag == 1)
+                    {
+                        Console.WriteLine("String is palindrome");
+                    }
+                    else
+                    {
+                        Console.WriteLine("String is not palindrome");
+                    }
+                 break;
+                    default:
+                    Console.WriteLine("Exit");
                     break;
             }
         }
