@@ -8,10 +8,13 @@ namespace DataStructureAlgorithms
     {
         public T value;
         public Node<T> Next;
+        public Node<T> prev;
+
         public Node(T value)
         {
             this.value = value;
             this.Next = null;
+            this.prev = null;
         }
     }
 }
