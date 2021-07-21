@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace DataStructureAlgorithms
@@ -14,7 +15,7 @@ namespace DataStructureAlgorithms
             string text = File.ReadAllText(filePath);
             string[] stringArray = text.Split(" ");
 
-            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Palindrome Checker");
+            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Palindrome Checker\n5.PrimeArray");
             Console.WriteLine("Enter Your Option");
             int choice = (Convert.ToInt32(Console.ReadLine()));
             switch (choice)
@@ -111,6 +112,30 @@ namespace DataStructureAlgorithms
                         Console.WriteLine("String is not palindrome");
                     }
                  break;
+                case 5:
+                    PrimeArray prime = new PrimeArray();
+                    prime.PrimeRange();
+                    prime.Print();
+                    break;
+                case 6:
+                    BankDetails account;
+                    LinkedList<BankDetails> bankAccountsList = new LinkedList<BankDetails>();
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.WriteLine("Enter account holder name:");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("enter amount:");
+                        int amount = Convert.ToInt32(Console.ReadLine());
+                        account = new BankDetails(name, amount);
+                        bankAccountsList.AddLast(account);
+
+                    }
+                  CashCounter<string> cashCounter = new CashCounter<string>();
+                    //cashCounter.Accholder(bankAccountsList);
+                    cashCounter.Operation();
+
+                    break;
+
                     default:
                     Console.WriteLine("Exit");
                     break;
