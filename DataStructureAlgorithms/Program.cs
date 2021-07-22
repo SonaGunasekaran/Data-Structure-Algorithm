@@ -113,7 +113,7 @@ namespace DataStructureAlgorithms
                     }
                  break;
                 case 5:
-                    PrimeArray prime = new PrimeArray();
+                    PrimeArray<int> prime = new PrimeArray<int>();
                     prime.PrimeRange();
                     prime.Print();
                     prime.AnagramRange();
