@@ -4,16 +4,17 @@ using System.Text;
 
 namespace DataStructureAlgorithms
 {
-    class PrimeArray
+    class PrimeArray<T>
     {
         // Initialising 2d Array for prime numbers 
         public int[,] primeNum = new int[10, 100];
         int p = 0, q = 0;
         int count = 0;
         int[] array = new int[1000];
-        int[,] anagram = new int[10, 100];
+       // int[,] anagram = new int[10, 100];
         int[] primeAnagram = new int[10];
         int[] prime = new int[10];
+        PrimeStack<int> anagram = new PrimeStack<int>();
         public void PrimeRange()
         {
             int value = 2;
@@ -73,20 +74,11 @@ namespace DataStructureAlgorithms
                     }
                     if (CheckAnagram(array[i].ToString(), array[j].ToString()))
                     {
-                        anagram[p, q] = array[i];
-                        q++;
+                        anagram.Push(array[i]);
                         break;
                     }
                 }
-                if (array[i + 1] > num)
-                {
-                    primeAnagram[p] = q;
-                    q = 0;
-                    p++;
-                    num = num + 100;
-                }
             }
-            primeAnagram[p] = q;
         }
         //Printing PrimeArray
         public void Print()
@@ -106,20 +98,11 @@ namespace DataStructureAlgorithms
         //Printing Anagram
         public void PrintAnagram()
         {
-            for (int i = 0; i < p + 1; i++)
+            while (anagram.CheckTop() == 0)
             {
-                for (int j = 0; j < primeAnagram[i]; j++)
-                {
-                    if (anagram[i, j] != 0)
-                    {
-
-                        Console.Write(anagram[i, j]);
-                    }
-                    Console.WriteLine( );
-                }
-                
+                anagram.Pop();
             }
-
+            Console.WriteLine();
         }
         //Check for prime
         public bool IsPrime(int i)
