@@ -14,7 +14,7 @@ namespace DataStructureAlgorithms
        // int[,] anagram = new int[10, 100];
         int[] primeAnagram = new int[10];
         int[] prime = new int[10];
-        PrimeStack<int> anagram = new PrimeStack<int>();
+        PrimeAnagramQueue<int> anagram = new PrimeAnagramQueue<int>();
         public void PrimeRange()
         {
             int value = 2;
@@ -63,7 +63,6 @@ namespace DataStructureAlgorithms
         
         public void AnagramRange()
         {
-            int num = 100;
             for (int i = 0; i < count; i++)
             {
                 for (int j = 0; j < count; j++)
@@ -74,7 +73,7 @@ namespace DataStructureAlgorithms
                     }
                     if (CheckAnagram(array[i].ToString(), array[j].ToString()))
                     {
-                        anagram.Push(array[i]);
+                        anagram.Enqueue(array[i]);
                         break;
                     }
                 }
@@ -98,11 +97,10 @@ namespace DataStructureAlgorithms
         //Printing Anagram
         public void PrintAnagram()
         {
-            while (anagram.CheckTop() == 0)
+            while (anagram.CheckFront() == 1)
             {
-                anagram.Pop();
+                anagram.Deque();
             }
-            Console.WriteLine();
         }
         //Check for prime
         public bool IsPrime(int i)
