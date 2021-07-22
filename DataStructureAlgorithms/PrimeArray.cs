@@ -8,26 +8,85 @@ namespace DataStructureAlgorithms
     {
         // Initialising 2d Array for prime numbers 
         public int[,] primeNum = new int[10, 100];
+        int p = 0, q = 0;
+        int count = 0;
+        int[] array = new int[1000];
+        int[,] anagram = new int[10, 100];
+        int[] primeAnagram = new int[10];
         int[] prime = new int[10];
-
         public void PrimeRange()
         {
-            int num = 2;
+            int value = 2;
             int k = 0;
             for (int i = 0; i < 10; i++)
             {
                 k = 0;
                 for (int j = 0; j < 100; j++)
                 {
-                    if (IsPrime(num))
+                    if (IsPrime(value))
                     {
-                        primeNum[i, k] = num;
+                        primeNum[i, k] = value;
+                        array[count] = value;
                         k++;
+                        count++;
                     }
-                    num++;
+                    value++;
                 }
                 prime[i] = k;
             }
+        }
+        //check for Anagram
+        public bool CheckAnagram(string str1, string str2)
+        {
+            bool isAnagram = false;
+            char[] char1 = str1.ToCharArray();
+            char[] char2 = str2.ToCharArray();
+            Array.Sort(char1);
+            Array.Sort(char2);
+            String s1 = new String(char1);
+            String s2 = new String(char2);
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (s1.Equals(s2))
+                {
+                    isAnagram = true;
+                }
+                else
+                {
+                    isAnagram = false;
+                    break;
+                }
+            }
+            return isAnagram;
+        }
+        
+        public void AnagramRange()
+        {
+            int num = 100;
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < count; j++)
+                {
+                    if (array[i] == array[j])
+                    {
+                        continue;
+                    }
+                    if (CheckAnagram(array[i].ToString(), array[j].ToString()))
+                    {
+                        anagram[p, q] = array[i];
+                        q++;
+                        break;
+                    }
+                }
+                if (array[i + 1] > num)
+                {
+                    primeAnagram[p] = q;
+                    q = 0;
+                    p++;
+                    num = num + 100;
+                }
+            }
+            primeAnagram[p] = q;
         }
         //Printing PrimeArray
         public void Print()
@@ -44,6 +103,25 @@ namespace DataStructureAlgorithms
                 Console.WriteLine( );
             }
         }
+        //Printing Anagram
+        public void PrintAnagram()
+        {
+            for (int i = 0; i < p + 1; i++)
+            {
+                for (int j = 0; j < primeAnagram[i]; j++)
+                {
+                    if (anagram[i, j] != 0)
+                    {
+
+                        Console.Write(anagram[i, j]);
+                    }
+                    Console.WriteLine( );
+                }
+                
+            }
+
+        }
+        //Check for prime
         public bool IsPrime(int i)
         {
             int j, flag;
@@ -57,21 +135,20 @@ namespace DataStructureAlgorithms
             // flag variable to tell
             // if i is prime or not
             flag = 1;
-
-                for (j = 2; j <= i / 2; ++j)
+            for (j = 2; j <= i / 2; ++j)
+            {
+                if (i % j == 0)
                 {
-                    if (i % j == 0)
-                    {
-                        flag = 0;
-                        break;
-                    }
+                   flag = 0;
+                    break;
                 }
-                // flag = 1 means i is prime
-                // and flag = 0 means i is not prime
-                if (flag == 1)
-                {
-                findPrime = true;
-                }
+            }
+            // flag = 1 means i is prime
+            // and flag = 0 means i is not prime
+            if (flag == 1)
+            {
+              findPrime = true;
+            }
             return findPrime;
         }
             

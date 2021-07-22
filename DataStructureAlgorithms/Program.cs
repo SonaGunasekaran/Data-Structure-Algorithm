@@ -116,6 +116,8 @@ namespace DataStructureAlgorithms
                     PrimeArray prime = new PrimeArray();
                     prime.PrimeRange();
                     prime.Print();
+                    prime.AnagramRange();
+                    prime.PrintAnagram();
                     break;
                 case 6:
                     BankDetails account;
